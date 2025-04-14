@@ -53,6 +53,7 @@ class MainWindow(QMainWindow):
         dialog = SearchDialog(self)
         dialog.exec()
 
+
 app = QApplication(sys.argv)
 student_db = MainWindow()
 student_db.load_data()

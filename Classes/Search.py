@@ -1,9 +1,8 @@
-from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton, QTableWidgetItem
 import sqlite3
 
-from main import student_db
 
-
+#Search window displayed
 class SearchDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__()
@@ -31,19 +30,17 @@ class SearchDialog(QDialog):
         name = self.student_name.text()
         connection = sqlite3.connect("database.db")
         cursor = connection.cursor()
-        result = connection.execute("SELECT  * from students WHERE name = ?", (name,))
-
+        result = connection.execute("SELECT * from students WHERE name = ?", (name,))
+        rows = result.fetchall()
         print(rows)
-
-
-        items = student_db.table.findItems(name, Qt.MatchFlag.MatchFixedString)
-        for item in items:
-            print(item)
-            student_db.table.item(item.row(), 1).setSelected(True)
-
         cursor.close()
         connection.close()
 
-        # Call back to main window to refresh table
-        if self.parent:
-            self.parent.load_data()
+        #clear the table first
+        self.parent.table.setRowCount(0)
+
+        for row_index, row_data in enumerate(rows):
+            self.parent.table.insertRow(row_index)
+            for col_index, data in enumerate(row_data):
+                item = QTableWidgetItem(str(data))
+                self.parent.table.setItem(row_index, col_index, item)
