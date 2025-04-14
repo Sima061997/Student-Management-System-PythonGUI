@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QComboBox, QPushBut
 import sqlite3
 
 
+#Insert window displayed
 class InsertDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__()
