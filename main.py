@@ -1,5 +1,6 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, QTableWidgetItem
-from PyQt6.QtGui import QAction
+
+from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, QTableWidgetItem, QToolBar, QStatusBar, QLabel, QTableView
+from PyQt6.QtGui import QAction, QIcon
 from Classes.Insert import InsertDialog
 from Classes.Search import SearchDialog
 import sys
@@ -16,14 +17,14 @@ class MainWindow(QMainWindow):
         help_menu_item = self.menuBar().addMenu("&Help")
         edit_menu_item = self.menuBar().addMenu("&Edit")
 
-        add_student_action = QAction("Add Student", self)
+        add_student_action = QAction(QIcon("icons/icons/add.png"), "Add Student", self)
         add_student_action.triggered.connect(self.insert_student)
         file_menu_item.addAction(add_student_action)
 
         about_action = QAction("About", self)
         help_menu_item.addAction(about_action)
 
-        search_student_action = QAction("Search", self)
+        search_student_action = QAction(QIcon("icons/icons/search.png"), "Search", self)
         search_student_action.triggered.connect(self.search_student)
         edit_menu_item.addAction(search_student_action)
 
@@ -32,6 +33,22 @@ class MainWindow(QMainWindow):
         self.table.setHorizontalHeaderLabels(("Id", "Name", "Course", "Mobile"))
         self.table.verticalHeader().setVisible(False)
         self.setCentralWidget(self.table)
+
+        # Create toolbar and add toolbar elements
+        toolbar = QToolBar()
+        toolbar.setMovable(True)
+        self.addToolBar(toolbar)
+        toolbar.addAction(add_student_action)
+        toolbar.addAction(search_student_action)
+
+        # Create status bar and add status bar elements
+        statusbar = QStatusBar()
+        self.setStatusBar(statusbar)
+
+        hello = QLabel("Edit")
+        statusbar.addWidget(hello)
+        hello = QLabel("Delete")
+        statusbar.addWidget(hello)
 
     def load_data(self):
         connection = sqlite3.connect("./database.db")
