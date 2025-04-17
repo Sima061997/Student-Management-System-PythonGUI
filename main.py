@@ -1,8 +1,10 @@
-
-from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, QTableWidgetItem, QToolBar, QStatusBar, QLabel, QTableView
+from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, QTableWidgetItem, QToolBar, QStatusBar, \
+    QLabel, QTableView, QPushButton
 from PyQt6.QtGui import QAction, QIcon
 from Classes.Insert import InsertDialog
 from Classes.Search import SearchDialog
+from Classes.Edit import ClickSignal, EditDialog
+from Classes.Delete import DeleteDialog
 import sys
 import sqlite3
 
@@ -45,10 +47,13 @@ class MainWindow(QMainWindow):
         statusbar = QStatusBar()
         self.setStatusBar(statusbar)
 
-        hello = QLabel("Edit")
-        statusbar.addWidget(hello)
-        hello = QLabel("Delete")
-        statusbar.addWidget(hello)
+        edit_label = ClickSignal("Edit")
+        edit_label.clicked.connect(self.edit_student)
+        statusbar.addWidget(edit_label)
+
+        delete_label = ClickSignal("Delete")
+        delete_label.clicked.connect(self.delete_student)
+        statusbar.addWidget(delete_label)
 
     def load_data(self):
         connection = sqlite3.connect("./database.db")
@@ -70,6 +75,35 @@ class MainWindow(QMainWindow):
         dialog = SearchDialog(self)
         dialog.exec()
 
+    def edit_student(self):
+        current_item = self.table.currentItem()
+
+        if current_item is None:
+            return          # No changes when item is not selected
+        # Get the row of the selected cell
+        row = current_item.row()
+        #Retrive the data from the selected row
+        student_id = self.table.item(row, 0).text()
+        name = self.table.item(row, 1).text()
+        course = self.table.item(row, 2).text()
+        mobile = self.table.item(row, 3).text()
+
+        dialog = EditDialog(student_id, name, course, mobile, self)
+        dialog.exec()
+
+    def delete_student(self):
+        current_item = self.table.currentItem()
+
+        if current_item is None:
+            return          # No changes when item is not selected
+
+        row = current_item.row()
+
+        #Retrive student Id from the selected row
+        student_id = self.table.item(row, 0).text()
+
+        dialog = DeleteDialog(student_id, self)
+        dialog.show()
 
 app = QApplication(sys.argv)
 student_db = MainWindow()
