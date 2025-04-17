@@ -4,7 +4,7 @@ from PyQt6.QtGui import QAction, QIcon
 from Classes.Insert import InsertDialog
 from Classes.Search import SearchDialog
 from Classes.Edit import ClickSignal, EditDialog
-from Classes.Delete import DeleteDialog
+from Classes.Delete import DeleteMessage
 import sys
 import sqlite3
 
@@ -102,8 +102,9 @@ class MainWindow(QMainWindow):
         #Retrive student Id from the selected row
         student_id = self.table.item(row, 0).text()
 
-        dialog = DeleteDialog(student_id, self)
+        dialog = DeleteMessage(student_id, self)
         dialog.show()
+
 
 app = QApplication(sys.argv)
 student_db = MainWindow()

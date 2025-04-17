@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import QMessageBox
 import sqlite3
 
 
-class DeleteDialog(QMessageBox):
+class DeleteMessage(QMessageBox):
     def __init__(self, student_id, parent=None):
         super().__init__()
         self.student_id = student_id
