@@ -1,3 +1,6 @@
 PyQt6==6.9.0
 PyQt6-Qt6==6.9.0
 PyQt6_sip==13.10.0
+mysql                  0.0.3
+mysql-connector-python 9.3.0
+mysqlclient            2.2.7
