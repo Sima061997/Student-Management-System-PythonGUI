@@ -25,7 +25,7 @@ class DeleteMessage(QMessageBox):
             # Execute DELETE query to remove student form db
             connection = DatabaseConnection().connect()
             cursor = connection.cursor()
-            cursor.execute("DELETE FROM students WHERE id = ?", (self.student_id,))
+            cursor.execute("DELETE FROM students WHERE id = %s", (self.student_id,))
             connection.commit()
             connection.close()
             # Call back to main window to refresh table

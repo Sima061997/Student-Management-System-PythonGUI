@@ -30,7 +30,7 @@ class SearchDialog(QDialog):
         name = self.student_name.text()
         connection = DatabaseConnection().connect()
         cursor = connection.cursor()
-        result = connection.execute("SELECT * from students WHERE name = ?", (name,))
+        result = connection.execute("SELECT * from students WHERE name = %s", (name,))
         rows = result.fetchall()
         print(rows)
         cursor.close()

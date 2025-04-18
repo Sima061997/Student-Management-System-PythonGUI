@@ -54,8 +54,8 @@ class EditDialog(QDialog):
         connection = DatabaseConnection().connect()
         cursor = connection.cursor()
         cursor.execute("""UPDATE students
-            SET name = ?, course = ?, mobile = ? 
-            WHERE id = ?
+            SET name = %s, course = %s, mobile = %s 
+            WHERE id = %s
             """, (name, course, mobile_no, self.student_id))
         connection.commit()
         cursor.close()

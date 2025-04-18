@@ -52,15 +52,21 @@ class MainWindow(QMainWindow):
         statusbar.addWidget(delete_label)
 
     def load_data(self):
-        connection = DatabaseConnection().connect()
-        result = connection.execute("SELECT * FROM students")
-        #print(list(result))
-        self.table.setRowCount(0)
-        for row_index, row_data in enumerate(result):
-            self.table.insertRow(row_index)
-            for column_index, data in enumerate(row_data):
-                self.table.setItem(row_index, column_index, QTableWidgetItem(str(data)))
-        connection.close()
+        try:
+            print("Loading data...")
+            connection = DatabaseConnection().connect()
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM students")
+            result = cursor.fetchall()
+            print(list(result))
+            self.table.setRowCount(0)
+            for row_index, row_data in enumerate(result):
+                self.table.insertRow(row_index)
+                for column_index, data in enumerate(row_data):
+                    self.table.setItem(row_index, column_index, QTableWidgetItem(str(data)))
+            connection.close()
+        except Exception as e:
+            print(f"Error loading data: {e}")
 
     #decorator function
     def insert_student(self):

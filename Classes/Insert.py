@@ -44,7 +44,7 @@ class InsertDialog(QDialog):
         mobile_no = self.student_mobile_no.text()
         connection = DatabaseConnection().connect()
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO students (name, course, mobile) VALUES (?, ?, ?)",
+        cursor.execute("INSERT INTO students (name, course, mobile) VALUES (%s, %s, %s)",
                        (name, course, mobile_no))
         connection.commit()
         cursor.close()

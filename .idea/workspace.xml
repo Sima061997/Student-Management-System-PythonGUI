@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ecf13354-1d2e-41a0-9730-9397f37eb614" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Classes/DBConnection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Classes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Classes/DBConnection.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/DBConnection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Classes/Delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/Delete.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Classes/Edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/Edit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Classes/Insert.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/Insert.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Classes/Search.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/Search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
