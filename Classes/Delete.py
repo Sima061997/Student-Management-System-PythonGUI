@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QMessageBox
-import sqlite3
+from Classes.DBConnection import DatabaseConnection
 
 
 class DeleteMessage(QMessageBox):
@@ -23,7 +23,7 @@ class DeleteMessage(QMessageBox):
 
         if reply == QMessageBox.StandardButton.Yes:
             # Execute DELETE query to remove student form db
-            connection = sqlite3.connect("database.db")
+            connection = DatabaseConnection().connect()
             cursor = connection.cursor()
             cursor.execute("DELETE FROM students WHERE id = ?", (self.student_id,))
             connection.commit()

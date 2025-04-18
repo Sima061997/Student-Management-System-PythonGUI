@@ -1,12 +1,8 @@
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, QTableWidgetItem, QToolBar, QStatusBar, \
     QLabel, QTableView, QPushButton
 from PyQt6.QtGui import QAction, QIcon
-from Classes.Insert import InsertDialog
-from Classes.Search import SearchDialog
-from Classes.Edit import ClickSignal, EditDialog
-from Classes.Delete import DeleteMessage
+from Classes import InsertDialog, SearchDialog, ClickSignal, EditDialog, DeleteMessage, DatabaseConnection
 import sys
-import sqlite3
 
 
 class MainWindow(QMainWindow):
@@ -56,7 +52,7 @@ class MainWindow(QMainWindow):
         statusbar.addWidget(delete_label)
 
     def load_data(self):
-        connection = sqlite3.connect("./database.db")
+        connection = DatabaseConnection().connect()
         result = connection.execute("SELECT * FROM students")
         #print(list(result))
         self.table.setRowCount(0)
